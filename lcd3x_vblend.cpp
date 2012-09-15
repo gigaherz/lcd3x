@@ -22,8 +22,9 @@ void lcd3x_16_565(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 		u16 c,nc=*ssrc1;
 		u16 r,g,b,nr,pb=0;
 		u16 or,og,ob;
-
-		nr= (*(ssrc1++))&0x1f;
+		
+		nc = *(ssrc1++);
+		nr= (nc>>11)&0x1f;
 		b=0;
 		for(int i=0;i<W;i++)
 		{
@@ -120,8 +121,9 @@ void lcd3x_16_555(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 		u16 c,nc=*ssrc1;
 		u16 r,g,b,nr,pb=0;
 		u16 or,og,ob;
-
-		nr= (*(ssrc1++))&0x1f;
+		
+		nc = *(ssrc1++);
+		nr= (nc>>10)&0x1f;
 		b=0;
 		for(int i=0;i<W;i++)
 		{

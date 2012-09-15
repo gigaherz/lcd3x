@@ -17,8 +17,9 @@ void lcd3x_16_565(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 		u16 c,nc=*ssrc;
 		u16 r,g,b,nr,pb=0;
 		u16 or,og,ob;
-
-		nr= (*(ssrc++))&0x1f;
+		
+		nc = *(ssrc++);
+		nr= (nc>>11)&0x1f;
 		b=0;
 		for(int i=0;i<W;i++)
 		{
@@ -47,7 +48,6 @@ void lcd3x_16_565(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 			or = CLEAK(nr) + CBLOOM(b);
 			og = CLEAK(g) + CBLOOM(b);
 			ob = b;
-
 			*(sdst++) = (or<<11) | (og<<5) | (ob);
 		}
 
@@ -76,8 +76,9 @@ void lcd3x_16_555(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 		u16 c,nc=*ssrc;
 		u16 r,g,b,nr,pb=0;
 		u16 or,og,ob;
-
-		nr= (*(ssrc++))&0x1f;
+		
+		nc = *(ssrc++);
+		nr= (nc>>10)&0x1f;
 		b=0;
 		for(int i=0;i<W;i++)
 		{
@@ -106,7 +107,6 @@ void lcd3x_16_555(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 			or = CLEAK(nr) + CBLOOM(b);
 			og = CLEAK(g) + CBLOOM(b);
 			ob = b;
-
 			*(sdst++) = (or<<10) | (og<<5) | (ob);
 		}
 
