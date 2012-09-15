@@ -6,7 +6,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release C-Only|Win32 = Release C-Only|Win32
-		Release MMX|Win32 = Release MMX|Win32
+		Release HScan|Win32 = Release HScan|Win32
 		Release VBlend|Win32 = Release VBlend|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -14,8 +14,8 @@ Global
 		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Debug|Win32.Build.0 = Debug|Win32
 		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release C-Only|Win32.ActiveCfg = Release C-Only|Win32
 		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release C-Only|Win32.Build.0 = Release C-Only|Win32
-		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release MMX|Win32.ActiveCfg = Release MMX|Win32
-		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release MMX|Win32.Build.0 = Release MMX|Win32
+		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release HScan|Win32.ActiveCfg = Release HScan|Win32
+		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release HScan|Win32.Build.0 = Release HScan|Win32
 		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release VBlend|Win32.ActiveCfg = Release VBlend|Win32
 		{D6F98EC0-CDCC-4594-8796-09E2457A8A4C}.Release VBlend|Win32.Build.0 = Release VBlend|Win32
 	EndGlobalSection

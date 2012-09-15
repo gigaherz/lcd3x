@@ -21,9 +21,6 @@
     <ClCompile Include="lcd3x_purec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lcd3x_vblend.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

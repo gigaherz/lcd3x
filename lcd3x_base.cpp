@@ -58,12 +58,13 @@ struct RENDER_PLUGIN_INFO
 	void*	OutputFunction; // Presumably to override the exported one
 } static PluginInfo = {
 	"LCD3x"
-#ifndef NOMMX
-	" w/MMX"
-#endif
 #ifdef DOVBLEND
+#ifdef HSCANLINES
+	" w/Scanlines"
+#else
 	" w/VBlend"
-#endif	
+#endif
+#endif
 	" (gigaherz)",
 	
 	RpiMakeFlags(
@@ -92,9 +93,9 @@ extern	"C"	__declspec(dllexport) void RenderPluginOutput(RENDER_PLUGIN_OUTP *rpo
 	}
 
 	if(bytesperpixel >= 3 &&
-		    (rpo->Flags&RpiPixelFormat888)) lcd3x_24    ((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
-	else if (rpo->Flags&RpiPixelFormat565)  lcd3x_16_565((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
-	else if (rpo->Flags&RpiPixelFormat888)  lcd3x_16_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+		    (rpo->Flags&RpiPixelFormat888)) lcd3x_888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	else if (rpo->Flags&RpiPixelFormat565)  lcd3x_565((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	else if (rpo->Flags&RpiPixelFormat888)  lcd3x_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
 
 	// Set the output size incase anybody cares.
 	rpo->OutW=rpo->SrcW*3;
