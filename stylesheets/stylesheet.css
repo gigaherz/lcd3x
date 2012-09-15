@@ -146,10 +146,12 @@ strong {
 img {
   position: relative;
   margin: 0 auto;
-  max-width: 739px;
   padding: 5px;
   margin: 10px 0 10px 0;
   border: 1px solid #ebebeb;
+  
+  margin-left: 0px auto;
+  margin-right: 0px auto;
 
   box-shadow: 0 0 5px #ebebeb;
   -webkit-box-shadow: 0 0 5px #ebebeb;
@@ -257,11 +259,18 @@ form {
   padding: 20px;
 }
 
-img {
-  width: 100%;
-  max-width: 100%;
+p.imgContainer {
+	text-align: center;
+	margin-top: 20px;
+	position: relative;
+	display: block;
+	left: -25%;
+	width: 150%;
 }
 
+p.imgContainer img {
+	margin: 0px;
+}
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
