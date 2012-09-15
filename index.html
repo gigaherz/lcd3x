@@ -37,9 +37,11 @@
 
 <h3>How does it work?</h3>
 
+<p class="imgContainer"><img src="images/unprocessed.png" alt="Unprocessed" /></p>
+
 <p>The basic algorithm works by converting each pixel into a square 3x3 grid, where each column takes the Red, Green and Blue components of the pixel, respectively.</p>
 
-<p class="imgContainer"><img src="images/lcd3x_original.png" alt="LCD3x Filter, Normal version" /></p>
+<p class="imgContainer"><img src="images/lcd3x_original.png" alt="LCD3x Filter, Original version" /></p>
 
 <p>Because just taking the component results in a loss of 66% of the brightness, the current code takes also 75% of the other color components. This results in a total of a 83% of the original brightness, but it loses 75% of the effect's depth. This 75% value was chosen empirically because it seemed the best balance between brightness and effect depth.</p>
 
