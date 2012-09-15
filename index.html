@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="LCD3x : The LCD simulation filter." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>LCD3x</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/gigaherz/lcd3x">View on GitHub</a>
+
+          <h1 id="project_title">LCD3x</h1>
+          <h2 id="project_tagline">The LCD simulation filter.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/gigaherz/lcd3x/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/gigaherz/lcd3x/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>What is LCD3x?</h3>
+
+<p>LCD3x is an image filter that simulates the aspect of an LCD screen while at the same time increasing the size of the source image. It is implemented using the Render Plugin Interface that the Kega emulator created, which is also compatible with the VisualBoyAdvance-M emulator.</p>
+
+<h3>How does it work?</h3>
+
+<p>The basic algorithm works by converting each pixel into a square 3x3 grid, where each column takes the Red, Green and Blue components of the pixel, respectively.</p>
+
+<p>Because just taking the component results in a loss of 66% of the brightness, the current code takes also 75% of the other color components. This results in a total of a 83% of the original brightness, but it loses 75% of the effect's depth. This 75% value was chosen empirically because it seemed the best balance between brightness and effect depth.</p>
+
+<p>There's two special versions of plugin, namely "VBlend" and "Scanlines". The former works on the top and bottom rows of each pixel's grid, and mixes 25% of the color content with the value of the row above or below. The Scanlines version does the same, but forgets to add the color to the bottom row, resulting in the bottom row of the grids to take a darker tone (75% of the original), giving it a scanline effect.</p>
+
+<p>The download package contains all three versions, and it's up to the user to decide which one works best.</p>
+
+<h3>Screenshots</h3>
+
+<p>Placeholder</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">LCD3x maintained by <a href="https://github.com/gigaherz">gigaherz</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
