@@ -82,6 +82,13 @@ extern	"C"	__declspec(dllexport) RENDER_PLUGIN_INFO * RenderPluginGetInfo(void) 
 //---------------------------------------------------------------------------------------------------------------------------
 extern	"C"	__declspec(dllexport) void RenderPluginOutput(RENDER_PLUGIN_OUTP *rpo)
 {
+	RpiPixelFormatSupport format = (RpiPixelFormatSupport)((rpo->Flags >> 10) & 0xF);
+
+#ifdef _DEBUG
+	RpiMmxSupport mmxMode = (RpiMmxSupport)((rpo->Flags >> 8) & 3);
+	int scaleLevel = (rpo->Flags >> 16);
+#endif
+
 	int bytesperpixel = rpo->SrcPitch / rpo->SrcW;
 
 	if(	((rpo->SrcW*3)>rpo->DstW) ||
@@ -93,9 +100,9 @@ extern	"C"	__declspec(dllexport) void RenderPluginOutput(RENDER_PLUGIN_OUTP *rpo
 	}
 
 	if(bytesperpixel >= 3 &&
-		    (rpo->Flags&RpiPixelFormat888)) lcd3x_888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
-	else if (rpo->Flags&RpiPixelFormat565)  lcd3x_565((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
-	else if (rpo->Flags&RpiPixelFormat888)  lcd3x_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+		    (format&RpiPixelFormat888)) lcd3x_888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	else if (format&RpiPixelFormat565)  lcd3x_565((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	else if (format&RpiPixelFormat888)  lcd3x_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
 
 	// Set the output size incase anybody cares.
 	rpo->OutW=rpo->SrcW*3;
