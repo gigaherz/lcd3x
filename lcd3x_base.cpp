@@ -9,14 +9,14 @@ typedef void (* processFn)(u8*, u32, u8*,  u8*, u32, int, int);
 
 const u32 RpiVersion = 0x02;
 
-enum RpiMmxSupport : int
+enum RpiMmxSupport : u32
 {
 	RpiNoMmx = 0,
 	RpiSupportMmx = 1,
 	RpiRequireMmx = 2,
 };
 
-enum RpiPixelFormatSupport : int
+enum RpiPixelFormatSupport : u32
 {
 	RpiPixelFormat555 = 1,
 	RpiPixelFormat565 = 2,
@@ -57,23 +57,26 @@ struct RENDER_PLUGIN_INFO
 	void*	Handle;
 	void*	OutputFunction; // Presumably to override the exported one
 } static PluginInfo = {
-	"LCD3x"
+	"LCD3x by gigaherz"
+#ifdef _DEBUG
+	" [DEBUG]"
+#endif
 #ifdef DOVBLEND
+	" [VBlend"
 #ifdef HSCANLINES
-	" w/Scanlines"
-#else
-	" w/VBlend"
+	",Scanlines"
 #endif
+	"]"
 #endif
-	" (gigaherz)",
-	
-	RpiMakeFlags(
+	, RpiMakeFlags(
 #ifndef NOMMX
 		RpiSupportMmx | RpiRequireMmx,
 #else
 		RpiNoMmx,
 #endif
-		RpiPixelFormat555 | RpiPixelFormat565 | RpiPixelFormat888, 3)
+		RpiPixelFormat555 | RpiPixelFormat565 | RpiPixelFormat888, 3),
+	nullptr,
+	nullptr
 };
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -86,23 +89,26 @@ extern	"C"	__declspec(dllexport) void RenderPluginOutput(RENDER_PLUGIN_OUTP *rpo
 
 #ifdef _DEBUG
 	RpiMmxSupport mmxMode = (RpiMmxSupport)((rpo->Flags >> 8) & 3);
-	int scaleLevel = (rpo->Flags >> 16);
 #endif
 
 	int bytesperpixel = rpo->SrcPitch / rpo->SrcW;
 
 	if(	((rpo->SrcW*3)>rpo->DstW) ||
-		((rpo->SrcH*3)>rpo->DstH) )
+		((rpo->SrcH*3)>rpo->DstH) ||
+		bytesperpixel > 4)
 	{
 		rpo->OutW=0;
 		rpo->OutH=0;
 		return;
 	}
 
-	if(bytesperpixel >= 3 &&
-		    (format&RpiPixelFormat888)) lcd3x_888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	if (format & RpiPixelFormat888)
+	{
+		if (bytesperpixel >= 4) lcd3x_8888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+		else if (bytesperpixel == 3) lcd3x_888((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	}
 	else if (format&RpiPixelFormat565)  lcd3x_565((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
-	else if (format&RpiPixelFormat888)  lcd3x_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
+	else if (format&RpiPixelFormat555)  lcd3x_555((u8*)rpo->SrcPtr, rpo->SrcPitch, (u8*)rpo->DstPtr, rpo->DstPitch, rpo->SrcW, rpo->SrcH);
 
 	// Set the output size incase anybody cares.
 	rpo->OutW=rpo->SrcW*3;

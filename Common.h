@@ -2,7 +2,7 @@
 
 typedef unsigned char u8;
 typedef unsigned short u16;
-typedef unsigned int u32;
+typedef unsigned long u32;
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -19,6 +19,7 @@ void __forceinline lblit(void *dest, void *src, u32 len)
 extern void lcd3x_555(u8 *src, u32 S, u8 *dest, u32 D, int W, int H);
 extern void lcd3x_565(u8 *src, u32 S, u8 *dest, u32 D, int W, int H);
 extern void lcd3x_888(u8 *src, u32 S, u8 *dest, u32 D, int W, int H);
+extern void lcd3x_8888(u8* src, u32 S, u8* dest, u32 D, int W, int H);
 
 //---------------------------------------------------------------------------------------------------------------------------
 

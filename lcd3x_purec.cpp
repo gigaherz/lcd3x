@@ -243,7 +243,6 @@ void lcd3x_888(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 	}
 }
 
-// Not used (yet)
 void lcd3x_8888(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 {
 	u8 *psrc = src;
@@ -265,8 +264,7 @@ void lcd3x_8888(u8 *src, u32 S, u8 *dest, u32 D, int W, int H)
 		u32 pb = 0;
 		for(int i=0;i<W;i++)
 		{
-			nc = *(u32*)ssrc;
-			ssrc+=3;
+			nc = *(ssrc++);
 
 			u32 cr = nr, cg = ng, cb = nb;
 			

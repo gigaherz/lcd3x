@@ -10,3 +10,17 @@
 *.lai
 *.la
 *.a
+
+*.sdf
+*.suo
+*.user
+
+/out
+/out_x64
+/.vs
+/Debug
+/x64
+/Release C-Only
+/Release VBlend
+/Release HScan
+/_ReSharper.lcd3x
